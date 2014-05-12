@@ -1,3 +1,4 @@
+require 'redcarpet'
 module Kss
   module ApplicationHelper
     # Generates a styleguide block. A little bit evil with @_out_buf, but
