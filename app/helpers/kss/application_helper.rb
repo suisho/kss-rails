@@ -1,3 +1,4 @@
+require 'redcarpet'
 module Kss
   module ApplicationHelper
     # Generates a styleguide block. A little bit evil with @_out_buf, but
@@ -5,7 +6,7 @@ module Kss
     # very easily.
     def styleguide_block(section, &block)
       raise ArgumentError, "Missing block" unless block_given?
-      
+
       @section = styleguide.section(section)
 
       if !@section.raw
@@ -15,5 +16,14 @@ module Kss
       content = capture(&block)
       render 'kss/shared/styleguide_block', :section => @section, :example_html => content
     end
+
+    def markdown(text)
+      @markdown ||= begin
+        renderer = Redcarpet::Render::HTML.new
+        @markdown = Redcarpet::Markdown.new(renderer)
+      end
+      @markdown.render(text).html_safe
+    end
+
   end
 end
