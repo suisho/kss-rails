@@ -1,7 +1,7 @@
 module Kss
-  class HomeController < Kss::ApplicationController
+  class HomeController < ApplicationController
+    include StyleguideParser
     def index
-
     end
   end
 end
